@@ -128,6 +128,7 @@ if (encryptionPassword == null)
     Environment.Exit(1);
 }
 
+var valuesToPrint = new List<JsonObject>();
 foreach (var kv in manifest!.Entries)
 {
     var maFilePath = System.IO.Path.GetFullPath(kv.Filename);
@@ -143,5 +144,9 @@ foreach (var kv in manifest!.Entries)
     var value = JsonValue.Parse(decryptedText);
     var result = value as JsonObject;
 
-    Console.WriteLine("{0}: {1}", kv.SteamID, (string)result!["shared_secret"]!);
+    var format = $"{{ \"steam_id\":\"{kv.SteamID}\", \"shared_secret\":\"{(string)result!["shared_secret"]!}\" }}";
+    var print = JsonValue.Parse(format);
+    valuesToPrint.Add(print as JsonObject);
 }
+
+Console.WriteLine(JsonValue.Create(valuesToPrint).ToString());
