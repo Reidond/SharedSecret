@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "SharedSecret": {
+      "commandName": "Project",
+      "commandLineArgs": ".\\manifest.json",
+      "workingDirectory": "C:\\Program Files\\SDA\\maFiles",
+      "environmentVariables": {
+        "S2FAENCRYPTKEY": ""
+      }
+    }
+  }
+}
