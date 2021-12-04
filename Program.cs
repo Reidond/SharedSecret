@@ -102,7 +102,9 @@ string? encryptionPassword = Environment.GetEnvironmentVariable(S2FAENCRYPTKEY_E
 string? manifestPath = null;
 try
 {
-    manifestPath = System.IO.Path.GetFullPath((string?)arguments.GetValue(1)!);
+    var path = (string?)arguments.GetValue(1)!;
+    var basePath = String.Join(Path.DirectorySeparatorChar, path.Split(Path.DirectorySeparatorChar).SkipLast(1));
+    manifestPath = System.IO.Path.GetFullPath(path, basePath);
 }
 catch
 {
@@ -131,7 +133,8 @@ if (encryptionPassword == null)
 var valuesToPrint = new List<JsonObject>();
 foreach (var kv in manifest!.Entries)
 {
-    var maFilePath = System.IO.Path.GetFullPath(kv.Filename);
+    var basePath = string.Join(Path.DirectorySeparatorChar, manifestPath.Split(Path.DirectorySeparatorChar).SkipLast(1));
+    var maFilePath = System.IO.Path.GetFullPath(kv.Filename, basePath);
     var maFile = await File.ReadAllTextAsync(maFilePath);
 
     string decryptedText = DecryptData(
