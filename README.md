@@ -5,7 +5,7 @@ Decrypt shared secret from your [Steam Desktop Authenticator](https://github.com
 ## Usage
 
 ```powershell
-$Env:S2FAENCRYPTKEY = '<YOUR KEY HERE>'; .\bin\Release\net6.0\SharedSecret.exe "C:\Program Files\SDA\maFiles\manifest.json"
+$Env:S2FAENCRYPTKEY = "<YOUR KEY HERE>"; .\bin\Release\net6.0\SharedSecret.exe "C:\Program Files\SDA\maFiles\manifest.json"
 ```
 
 ```json
